@@ -4,9 +4,9 @@ open Deedle
 open Akka.FSharp
 
 
-///////////////////////
+
 // Utility functions //
-///////////////////////
+
 
 // Round number of nodes to get perfect square in case of 2D and imperfect 2D grid
 let roundNodes numNodes topology =
@@ -30,9 +30,8 @@ let getRandomNeighborID (topologyMap: Map<_, _>) nodeID =
     neighborList.[random.Next(neighborList.Length)]
 
 
-//////////////////////////
 // Different topologies //
-//////////////////////////
+
 
 let buildLineTopology numNodes =
     let mutable map = Map.empty
@@ -146,9 +145,7 @@ let buildTopology numNodes topology =
     | "imperfect3d" -> buildImperfect3DTopology numNodes
     | "full" -> buildFullTopology numNodes
 
-///////////////////
 // Counter Actor //
-///////////////////
 
 type CounterMessage =
     | GossipNodeConverge
@@ -185,9 +182,7 @@ let counter initialCount numNodes (filepath: string) (stopWatch: Diagnostics.Sto
     loop initialCount []
 
 
-//////////////////
 // Gossip Actor //
-//////////////////
 
 let gossip maxCount (topologyMap: Map<_, _>) nodeID counterRef (mailbox: Actor<_>) = 
     let rec loop (count: int) = actor {
@@ -232,9 +227,7 @@ let gossip maxCount (topologyMap: Map<_, _>) nodeID counterRef (mailbox: Actor<_
     loop 0
 
 
-//////////////
 // Push sum //
-//////////////
  
 type PushSumMessage =
     | Initialize
